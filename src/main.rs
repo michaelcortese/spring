@@ -40,8 +40,8 @@ async fn main() {
     let rest_length: f32 = 200.0;
 
     // input muts
-    let mut x: String = "100.0".to_owned();
-    let mut y: String = "-200".to_owned();
+    let mut x: String = "30.0".to_owned();
+    let mut y: String = "-50.0".to_owned();
 
     loop {
         clear_background(WHITE);
