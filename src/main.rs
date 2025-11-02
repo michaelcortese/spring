@@ -27,7 +27,7 @@ impl Body {
 
 #[macroquad::main("Spring")]
 async fn main() {
-    let mut k: f32 = 0.05;
+    let mut k: f32 = 0.01;
 
     // F = -kx
     let origin = vec2(0.0, 50.0);
