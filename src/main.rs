@@ -38,19 +38,33 @@ async fn main() {
         mass: 2.0,
     };
     let rest_length: f32 = 200.0;
+
+    // input muts
+    let mut x: String = String::default();
+    let mut y: String = String::default();
+
     loop {
         clear_background(WHITE);
 
         root_ui().label(None, "Spring Constant");
         root_ui().slider(0, "", 0.01..1.0, &mut k);
-        if is_mouse_button_pressed(MouseButton::Left) {
-            let (mx, my) = mouse_position();
-            // convert mouse to physics space
-            let mouse_world = vec2(mx - screen_width() / 2.0, my);
-            // direction from mass to mouse
-            let to_mouse = mouse_world - spring.pos;
-            spring.add_force(to_mouse * 0.5); // scale so it’s not insane
+        root_ui().input_text(1, "-- x force", &mut x);
+        root_ui().input_text(2, "-- y force", &mut y);
+
+        if root_ui().button(None, "Apply forces") {
+            let x = x.parse::<f32>().unwrap_or(0.0);
+            let y = y.parse::<f32>().unwrap_or(0.0);
+            spring.add_force(vec2(x, y));
         }
+
+        // if is_mouse_button_pressed(MouseButton::Left) {
+        //     let (mx, my) = mouse_position();
+        //     // convert mouse to physics space
+        //     let mouse_world = vec2(mx - screen_width() / 2.0, my);
+        //     // direction from mass to mouse
+        //     let to_mouse = mouse_world - spring.pos;
+        //     spring.add_force(to_mouse * 0.5); // scale so it’s not insane
+        // }
 
         let mut dir = spring.pos - origin;
         let current_length = dir.length();
